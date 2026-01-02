@@ -2,6 +2,7 @@
 import { type ClassValue, clsx } from "clsx";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
+import {z} from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -194,3 +195,45 @@ export const getTransactionStatus = (date: Date) => {
 
   return date > twoDaysAgo ? "Processing" : "Success";
 };
+
+export const authFormSchema = (type:String) => z.object({
+  // Sign-up
+  firstName: type === 'sign-in' ? z.string().optional() : 
+  z.string().min(3, "First Name must be at least 3 characters")
+  .regex(/^[A-Za-z]+$/, "First Name must contain only letters"),
+
+  lastName: type === 'sign-in' ? z.string().optional() : 
+  z.string().min(3, "Last Name must be at least 3 characters")
+  .regex(/^[A-Za-z]+$/, "Last Name must contain only letters"),
+
+  address1: type === 'sign-in' ? z.string().optional() : 
+  z.string().max(50, "Cannot exceed more than 50 characters."),
+
+  city: type === 'sign-in' ? z.string().optional():
+  z.string().max(15, "Cannot exceed more than 15 characters."),
+
+  state: type === 'sign-in' ? z.string().optional() : 
+  z.string().max(3, "Cannot exceed more than 3 characters.").min(2, "Cannot be less than 2 characters."),
+
+  postalCode: type === 'sign-in' ? z.string().optional() :
+  z.string().min(3, "Cannot be less than 3 digits.")
+  .max(6, "Cannot exceed more than 6 digits.")
+  .regex(/^\d+$/, "Must contain numbers only"),
+
+  dateOfBirth: type === 'sign-in' ? z.string().optional() : 
+  z.string().regex(/^\d{2}-\d{2}-\d{4}$/, "DD-MM-YYYY format."),
+
+  ssn: type === 'sign-in' ? z.string().optional() :
+  z.string().max(15).regex(/^\d+$/, "SSN must contain numbers only."),
+
+  // Sign-in && Sign-up
+  email: z.string().email(),
+  password: z.
+  string()
+  .min(8, "Password must be at least 8 characters")
+  .max(32, "Password must be at most 32 characters")
+  .regex(/[A-Z]/, "Must contain at least one uppercase letter")
+  .regex(/[a-z]/, "Must contain at least one lowercase letter")
+  .regex(/\d/, "Must contain at least one number")
+  .regex(/[^A-Za-z0-9]/, "Must contain at least one special character"),
+});
