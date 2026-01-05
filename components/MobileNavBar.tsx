@@ -4,6 +4,9 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
@@ -11,7 +14,6 @@ import Link from "next/link";
 import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import Footer from "./Footer";
 
 const MobileNavBar = ({ user }: MobileNavProps) => {
   const pathName = usePathname();
@@ -85,8 +87,8 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
               </nav>
             </SheetClose>
 
-            <Footer user={user} type ="mobile" /> 
-            {/* type mobile for mobile and default is for desktop */}
+            
+            FOOTER
           </div>
         </SheetContent>
       </Sheet>
