@@ -14,7 +14,12 @@ import CustomInput from './CustomInput';
 import { authFormSchema } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { signIn, signUp } from '@/lib/server actions/user.actions';
+import {
+  getLoggedInUser,
+  signIn,
+  signUp,
+} from "@/lib/server actions/user.actions";
+
 
 
 
@@ -47,8 +52,7 @@ const AuthForm = ({type}: {type: String}) => {
 
   // 2. Define a submit handler.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+
     setIsLoading(true);
 
     try {
@@ -106,7 +110,7 @@ const AuthForm = ({type}: {type: String}) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          {/* PlainLink Component to Link our bank account */}
+          PlainLink Component to Link our bank account
         </div>
       ) : (
         <>
