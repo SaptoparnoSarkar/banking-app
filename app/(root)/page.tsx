@@ -2,11 +2,9 @@ import React from 'react'
 import HeaderBox from '@/components/HeaderBox';
 import SumBalanceBox from '@/components/SumBalanceBox';
 import RightSidebar from '@/components/RightSidebar';
-import { getLoggedInUser } from "@/lib/server actions/user.actions";
 
-const Dashboard = async () => {
-  const loggedIn = await getLoggedInUser();
-
+const Dashboard = () => {
+  const loggedIn = {firstName: 'Sapto', lastName:'Sarkar', email: 'contact@gmail.com'};
   return (
     <section className="home">
       <div className="home-content">
@@ -14,13 +12,13 @@ const Dashboard = async () => {
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.name || "Guest"}
+            user={loggedIn?.firstName || "Guest"}
             subtext="Access and manage your transactions efficiently."
           />
 
           <SumBalanceBox
-            accounts ={[]}
-            totalBanks ={1}
+            accounts = {[]}
+            totalBanks = {1}
             totalCurrentBalance ={411250.35}
             />
         </header>
@@ -32,7 +30,7 @@ const Dashboard = async () => {
       <RightSidebar  
         user={loggedIn}
         transactions={[]}
-        banks={[{ currentBalance: 1234.50 },{ currentBalance: 150 }]}
+        banks={[{ currentBalance: 1234.50},{ currentBalance: 150}]}
       />
     </section>
   );
