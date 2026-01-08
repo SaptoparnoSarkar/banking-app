@@ -1,35 +1,29 @@
-'use client'
-import Link from 'next/link';
-import React, { useState } from 'react'
-import Image from 'next/image';
+"use client";
+import Link from "next/link";
+import React, { useState } from "react";
+import Image from "next/image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import CustomInput from './CustomInput';
-import { authFormSchema } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import CustomInput from "./CustomInput";
+import { authFormSchema } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import {
   getLoggedInUser,
   signIn,
   signUp,
 } from "@/lib/server actions/user.actions";
+import PlaidLink from "./PlaidLink";
 
-
-
-
-const AuthForm = ({type}: {type: String}) => {
-
+const AuthForm = ({ type }: { type: String }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading]= useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const formSchema = authFormSchema(type);
   const router = useRouter();
-
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,50 +31,61 @@ const AuthForm = ({type}: {type: String}) => {
     defaultValues: {
       email: "",
       password: "",
-      ...(type === 'sign-up' ? {
-        firstName: "",
-        lastName: "",
-        address1: "",
-        city: "",
-        state: "",
-        postalCode: "",
-        dateOfBirth: "",
-        ssn: "",
-      }: {}),
+      ...(type === "sign-up"
+        ? {
+            firstName: "",
+            lastName: "",
+            address1: "",
+            city: "",
+            state: "",
+            postalCode: "",
+            dateOfBirth: "",
+            ssn: "",
+          }
+        : {}),
     },
   });
 
   // 2. Define a submit handler.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-
     setIsLoading(true);
 
     try {
       //SignUp with Appwrite & create plaid token
-
-      if(type === "sign-up"){
-        const newUser = await signUp(data);
-        setUser(newUser);
-      }
-      if(type === "sign-in"){
-        const response = await signIn({
+    
+      if (type === "sign-up") {
+        const userData = {
+          firstName: data.firstName!,
+          lastName: data.lastName!,
+          address1: data.address1!,
+          city: data.city!,
+          state: data.state!,
+          postalCode: data.postalCode!,
+          dateOfBirth: data.dateOfBirth!,
+          ssn: data.ssn!,
           email: data.email,
           password: data.password
-        })
+        }
 
-        if(response){
-          router.push('/');
+        const newUser = await signUp(userData); //Allowing tryscript know what we pass into signUp will surely have those values
+        setUser(newUser);
+      }
+      if (type === "sign-in") {
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+
+        if (response) {
+          router.push("/");
         }
       }
-    } 
-    catch(error){
+    } catch (error) {
       console.log(error);
-    }
-    finally{
+    } finally {
       setIsLoading(false);
     }
-    
-  }
+  };
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
@@ -108,11 +113,11 @@ const AuthForm = ({type}: {type: String}) => {
           </h1>
         </div>
       </header>
-      {user ? (
+      {/* {user ? ( */}
         <div className="flex flex-col gap-4">
-          PlainLink Component to Link our bank account
+         <PlaidLink user={user} variant="primary" />
         </div>
-      ) : (
+      {/* ) : (
         <>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -226,9 +231,9 @@ const AuthForm = ({type}: {type: String}) => {
             </Link>
           </footer>
         </>
-      )}
+      )} */}
     </section>
   );
-}
+};
 
-export default AuthForm
+export default AuthForm;

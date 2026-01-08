@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
+import * as Sentry from "@sentry/nextjs";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -9,13 +10,19 @@ const ibmPlexSerif = IBM_Plex_Serif({
   variable: '--font-ibm-plex-serif'
 })
 
-export const metadata: Metadata = {
+// Extend existing metadata + add Sentry trace data
+export function generateMetadata(): Metadata {
+  return {
   title: "FlexBank",
   description: "Banking App with Finance Management.",
   icons: {
     icon: '/icons/logo.svg'
-  }
-};
+  },
+    other: {
+      ...Sentry.getTraceData(),
+    },
+  };
+}
 
 export default function RootLayout({
   children,
