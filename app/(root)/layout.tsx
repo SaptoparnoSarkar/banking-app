@@ -19,6 +19,7 @@ export default async function RootLayout({
       <Sidebar 
       user={loggedIn}
       />
+      
       {/* For Smaller Screens */}
       <div className="flex flex-col size-full">
         <div className="root-layout">

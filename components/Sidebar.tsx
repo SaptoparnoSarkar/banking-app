@@ -24,27 +24,28 @@ const Sidebar = ({ user }: SiderbarProps) => {
           />
           <h1 className="sidebar-logo">FlexBank</h1>
         </Link>
-        {/* Links for all the other pages for our App. */}
-        {sidebarLinks.map((item) => {
+
+        {/* Navigation Links */}
+        {sidebarLinks.map((element) => {
           const isActive =
-            pathName === item.route || pathName.startsWith(`${item.route}/`);
+            pathName === element.route || pathName.startsWith(`${element.route}/`);
 
           return (
             <Link
-              href={item.route}
-              key={item.label}
+              href={element.route}
+              key={element.label}
               className={cn("sidebar-link", { "bg-bankGradient": isActive })}
             >
               <div className="relative size-6">
                 <Image
-                  src={item.imgURL}
-                  alt={item.label}
+                  src={element.imgURL}
+                  alt={element.label}
                   fill
                   className={cn({ "brightness-[3] invert-0": isActive })}
                 />
               </div>
               <p className={cn("sidebar-label", { "!text-white": isActive })}>
-                {item.label}
+                {element.label}
               </p>
             </Link>
           );

@@ -4,9 +4,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
@@ -30,6 +27,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
             className="cursor-pointer"
           />
         </SheetTrigger>
+        
         <SheetContent side="left" className="border-none bg-white">
           <Link
             href="/"

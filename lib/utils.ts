@@ -221,7 +221,7 @@ export const authFormSchema = (type:String) => z.object({
   .regex(/^\d+$/, "Must contain numbers only"),
 
   dateOfBirth: type === 'sign-in' ? z.string().optional() : 
-  z.string().regex(/^\d{2}-\d{2}-\d{4}$/, "DD-MM-YYYY format."),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD format."),
 
   ssn: type === 'sign-in' ? z.string().optional() :
   z.string().max(15).regex(/^\d+$/, "SSN must contain numbers only."),

@@ -11,6 +11,7 @@ const Dashboard = async () => {
     <section className="home">
       <div className="home-content">
         <header className="home-header">
+          
           <HeaderBox
             type="greeting"
             title="Welcome"
@@ -35,7 +36,7 @@ const Dashboard = async () => {
         banks={[{ currentBalance: 1234.50 },{ currentBalance: 150 }]}
       />
     </section>
-  );
+  )
 }
 
 export default Dashboard

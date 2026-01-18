@@ -5,19 +5,17 @@ import Image from "next/image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
-  getLoggedInUser,
   signIn,
   signUp,
 } from "@/lib/server actions/user.actions";
 import PlaidLink from "./PlaidLink";
+import { Form } from "./ui/form";
+import CustomInput from "./CustomInput";
+import { Button } from "./ui/button";
+import { Loader2 } from "lucide-react";
 
 const AuthForm = ({ type }: { type: String }) => {
   const [user, setUser] = useState(null);
@@ -49,10 +47,9 @@ const AuthForm = ({ type }: { type: String }) => {
   // 2. Define a submit handler.
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-
     try {
-      //SignUp with Appwrite & create plaid token
-    
+      //SignUp with Appwrite & create plaid token.
+
       if (type === "sign-up") {
         const userData = {
           firstName: data.firstName!,
@@ -66,26 +63,27 @@ const AuthForm = ({ type }: { type: String }) => {
           email: data.email,
           password: data.password
         }
-
-        const newUser = await signUp(userData); //Allowing tryscript know what we pass into signUp will surely have those values
+        const newUser = await signUp(userData); 
         setUser(newUser);
       }
+      //SignIn using User Auth.
       if (type === "sign-in") {
         const response = await signIn({
           email: data.email,
           password: data.password,
-        });
+        })
 
-        if (response) {
-          router.push("/");
-        }
+        if (response) router.push("/")
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
-    } finally {
+    } 
+    finally {
       setIsLoading(false);
     }
-  };
+  }
+
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
@@ -103,21 +101,24 @@ const AuthForm = ({ type }: { type: String }) => {
 
         <div className="flex flex-col gap-1 md:gap-3">
           <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
-            {user ? "Link Account" : type === "sign-in" ? "Sign-in" : "Sign-up"}
+            {user ?
+            "Link Account" : 
+             type === "sign-in" ? 
+            "Sign-in" : "Sign-up"}
+
             <p className="text-16 font-normal text-grey-600">
-              {" "}
               {user
                 ? "Link your account to get started"
-                : "Please enter your details"}{" "}
+                : "Please enter your details"}
             </p>
           </h1>
         </div>
       </header>
-      {/* {user ? ( */}
+      {user ? (
         <div className="flex flex-col gap-4">
          <PlaidLink user={user} variant="primary" />
         </div>
-      {/* ) : (
+      ) : (
         <>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -231,7 +232,7 @@ const AuthForm = ({ type }: { type: String }) => {
             </Link>
           </footer>
         </>
-      )} */}
+      )}
     </section>
   );
 };

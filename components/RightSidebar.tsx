@@ -6,7 +6,9 @@ import BankCard from './BankCard';
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
   return (
     <aside className="right-sidebar">
+
       {/* First Section: Personalization */}
+      
       <section className="flex flex-col pb-8">
         <div className="profile-banner" />
         <div className="profile">
@@ -15,7 +17,6 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
               {user.name[0]}
             </span>
           </div>
-
           <div className="profile-details">
             <h1 className="profile-name">
               {user.name}
@@ -24,7 +25,9 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           </div>
         </div>
       </section>
+
       {/* Second Section: Banks Information*/}
+
       <section className="banks">
         <div className="flex w-full justify-between">
           <h2 className="header-2">My Banks</h2>

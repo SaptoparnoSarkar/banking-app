@@ -1,4 +1,4 @@
-//Set-up New Plaid Configuration
+//Set-up New Plaid Configuration 
 import {Configuration, PlaidApi, PlaidEnvironments} from 'plaid';
 
 const configuration = new Configuration({

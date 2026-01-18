@@ -63,11 +63,7 @@ export const createDwollaCustomer = async (
   }
 };
 
-export const createTransfer = async ({
-  sourceFundingSourceUrl,
-  destinationFundingSourceUrl,
-  amount,
-}: TransferParams) => {
+export const createTransfer = async ({sourceFundingSourceUrl,destinationFundingSourceUrl,amount}:TransferParams) => {
   try {
     const requestBody = {
       _links: {
