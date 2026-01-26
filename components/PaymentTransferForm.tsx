@@ -1,0 +1,177 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+import { createTransfer } from "@/lib/server actions/dwolla.actions";
+import { createTransaction } from "@/lib/server actions/transaction.actions";
+import { getBank, getBankByAccountId } from "@/lib/server actions/user.actions";
+import { decryptId, paymentFormSchema } from "@/lib/utils";
+
+import { BankDropdown } from "./BankDropDown";
+import { Button } from "./ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import PaymentInput from "./PaymentInput";
+
+const formSchema = paymentFormSchema();
+
+const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      senderBank: "",
+      name: "",
+      email: "",
+      amount: "",
+      sharebleId: "",
+    },
+  });
+
+  const submit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+
+    try {
+      const receiverAccountId = decryptId(data.sharebleId);
+      const receiverBank = await getBankByAccountId({
+        accountId: receiverAccountId,
+      });
+      const senderBank = await getBank({ documentId: data.senderBank });
+
+      const transferParams = {
+        sourceFundingSourceUrl: senderBank.fundingSourceUrl,
+        destinationFundingSourceUrl: receiverBank.fundingSourceUrl,
+        amount: data.amount,
+      };
+      // create transfer
+      const transfer = await createTransfer(transferParams);
+
+      // create transfer transaction
+      if (transfer) {
+        const transaction = {
+          name: data.name,
+          amount: data.amount,
+          senderId: senderBank.userId.$id,
+          senderBankId: senderBank.$id,
+          receiverId: receiverBank.userId.$id,
+          receiverBankId: receiverBank.$id,
+          email: data.email,
+        };
+
+        const newTransaction = await createTransaction(transaction);
+
+        if (newTransaction) {
+          form.reset();
+          router.push("/");
+        }
+      }
+    } catch (error) {
+      console.error("Submitting create transfer request failed: ", error);
+    }
+
+    setIsLoading(false);
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(submit)} className="flex flex-col">
+        <FormField
+          control={form.control}
+          name="senderBank"
+          render={() => (
+            // Bank DropDown is unique, keeping it seperate.
+            <FormItem className="border-t border-gray-200">
+              <div className="payment-transfer_form-item pb-6 pt-5">
+                <div className="payment-transfer_form-content">
+                  <FormLabel className="text-14 font-medium text-gray-700">
+                    Select Source Bank
+                  </FormLabel>
+                  <FormDescription className="text-12 font-normal text-gray-600">
+                    Select the bank account you want to transfer funds from
+                  </FormDescription>
+                </div>
+                <div className="flex w-full flex-col">
+                  <FormControl>
+                    <BankDropdown
+                      accounts={accounts}
+                      setValue={form.setValue}
+                      otherStyles="!w-full"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-12 text-red-500" />
+                </div>
+              </div>
+            </FormItem>
+          )}
+        />
+
+        <PaymentInput
+          control={form.control}
+          name="name"
+          label="Transfer Note (Optional)"
+          placeholder="Write a short note here"
+          description="Please provide any additional information or instructions related to the transfer"
+          inputType="textarea"
+        />
+
+        <div className="payment-transfer_form-details">
+          <h2 className="text-18 font-semibold text-gray-900">
+            Bank account details
+          </h2>
+          <p className="text-16 font-normal text-gray-600">
+            Enter the bank account details of the recipient
+          </p>
+        </div>
+
+        <PaymentInput
+          control={form.control}
+          name="email"
+          label="Recipient's Email Address"
+          placeholder="ex: johndoe@gmail.com"
+        />
+
+        <PaymentInput
+          control={form.control}
+          name="sharebleId"
+          label="Receiver's Plaid Sharable Id"
+          placeholder="Enter the public account number"
+        />
+
+        <PaymentInput
+          control={form.control}
+          name="amount"
+          label="Amount"
+          placeholder="ex: 5.00"
+        />
+
+        <div className="payment-transfer_btn-box">
+          <Button type="submit" className="payment-transfer_btn">
+            {isLoading ? (
+              <>
+                <Loader2 size={20} className="animate-spin" /> &nbsp; Sending...
+              </>
+            ) : (
+              "Transfer Funds"
+            )}
+          </Button>
+        </div>
+      </form>
+    </Form>
+  );
+};
+
+export default PaymentTransferForm;

@@ -73,7 +73,14 @@ const AuthForm = ({ type }: { type: String }) => {
           password: data.password,
         })
 
-        if (response) router.push("/")
+        if (!response || response.error)  {
+            form.setError("password", {
+              type:"manual",
+              message: "Incorrect Password. Please Try Again."
+            });
+            return;
+        }
+          router.push("/")
       }
     } 
     catch (error) {
@@ -175,7 +182,7 @@ const AuthForm = ({ type }: { type: String }) => {
                       control={form.control}
                       name="dateOfBirth"
                       label="Date of Birth"
-                      placeholder="dd-mm-yyyy"
+                      placeholder="yyyy-mm-dd"
                     />
 
                     <CustomInput
@@ -201,6 +208,7 @@ const AuthForm = ({ type }: { type: String }) => {
                 label="Password"
                 placeholder="Enter your password"
               />
+              
               <div className="flex flex-col gap-4">
                 <Button type="submit" className="form-btn" disabled={isLoading}>
                   {isLoading ? (

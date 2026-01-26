@@ -12,6 +12,7 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Footer from "./Footer";
+import PlaidLink from "./PlaidLink";
 
 const MobileNavBar = ({ user }: MobileNavProps) => {
   const pathName = usePathname();
@@ -27,7 +28,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
             className="cursor-pointer"
           />
         </SheetTrigger>
-        
+
         <SheetContent side="left" className="border-none bg-white">
           <Link
             href="/"
@@ -82,7 +83,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                     </SheetClose>
                   );
                 })}
-                USER
+                <PlaidLink user={user} />
               </nav>
             </SheetClose>
 

@@ -150,8 +150,6 @@ export function countTransactionCategories(
         // Otherwise, initialize the count to 1
         categoryCounts[category] = 1;
       }
-
-      // Increment total count
       totalCount++;
     });
 
@@ -207,27 +205,27 @@ export const authFormSchema = (type:String) => z.object({
   .regex(/^[A-Za-z]+$/, "Last Name must contain only letters"),
 
   address1: type === 'sign-in' ? z.string().optional() : 
-  z.string().max(50, "Cannot exceed more than 50 characters."),
+  z.string().max(50, "Cannot exceed more than 50 characters"),
 
   city: type === 'sign-in' ? z.string().optional():
-  z.string().max(15, "Cannot exceed more than 15 characters."),
+  z.string().max(15, "Cannot exceed more than 15 characters"),
 
   state: type === 'sign-in' ? z.string().optional() : 
-  z.string().max(3, "Cannot exceed more than 3 characters.").min(2, "Cannot be less than 2 characters."),
+  z.string().max(3, "Cannot exceed more than 3 characters").min(2, "Cannot be less than 2 characters"),
 
   postalCode: type === 'sign-in' ? z.string().optional() :
-  z.string().min(3, "Cannot be less than 3 digits.")
-  .max(6, "Cannot exceed more than 6 digits.")
+  z.string().min(3, "Cannot be less than 3 digits")
+  .max(6, "Cannot exceed more than 6 digits")
   .regex(/^\d+$/, "Must contain numbers only"),
 
   dateOfBirth: type === 'sign-in' ? z.string().optional() : 
-  z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD format."),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD format"),
 
   ssn: type === 'sign-in' ? z.string().optional() :
-  z.string().max(15).regex(/^\d+$/, "SSN must contain numbers only."),
+  z.string().max(15).regex(/^\d+$/, "SSN must contain numbers only"),
 
   // Sign-in && Sign-up
-  email: z.string().email(),
+  email: z.string().email("Please enter a valid email address"),
   password: z.
   string()
   .min(8, "Password must be at least 8 characters")
@@ -237,3 +235,36 @@ export const authFormSchema = (type:String) => z.object({
   .regex(/\d/, "Must contain at least one number")
   .regex(/[^A-Za-z0-9]/, "Must contain at least one special character"),
 });
+
+export const paymentFormSchema = () => z.object
+({
+    senderBank: z.string().min(1, "Please select a valid bank account"),
+    name: z.string().min(4, "Transfer note is too short"),
+    email: z.string().email("Please enter a valid email address"),
+    sharebleId: z.string().min(1, "Recipient account is required"),
+    amount: z.string()
+      .regex(/[0-9]/, "Please enter a valid number")
+      .min(1, "Amount must be at least 10 rupees")
+      .max(100000, "Amount cannot exceed 1 lakh rupees"),
+  });
+
+export const getCustomCategory = (category:string):string => {
+  const CATEGORY_MAP: Record<string, string> = {
+    FOOD_AND_DRINK: "Food & Entertainment",
+    TRANSPORTATION: "Commute",
+    TRAVEL: "Commute",
+    ENTERTAINMENT: "Food & Entertainment",
+    INCOME: "Transfer",
+    TRANSFER_OUT: "Transfer",
+    Transfer: "Transfer",
+    LOAN_PAYMENTS: "Transfer",
+  };
+  // Fallback: formats "LOAN_PAYMENTS" to "Loan Payments"
+  return (
+    CATEGORY_MAP[category] ||
+    category
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ")
+  );
+}
