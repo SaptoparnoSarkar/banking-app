@@ -35,13 +35,13 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
             className="cursor-pointer flex items-center px-4 gap-1"
           >
             <Image
-              src="/icons/logo.svg"
+              src="/icons/logoBank2.svg"
               width={34}
               height={34}
-              alt="FlexBank Logo"
+              alt="VaultFlow Logo"
             />
             <h1 className="text-26 font-ibm-plex-serif font-bold text-[#2c4baa]">
-              FlexBank
+              VaultFlow
             </h1>
           </Link>
 

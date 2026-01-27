@@ -17,19 +17,20 @@ const Sidebar = ({ user }: SiderbarProps) => {
         {/* Logo Link */}
         <Link href="/" className="mb-12 cursor-pointer flex items-center gap-2">
           <Image
-            src="/icons/logo.svg"
+            src="/icons/logoBank2.svg"
             width={34}
             height={34}
-            alt="FlexBank Logo"
-            className="size-[24px] max-xl:size-14"
+            alt="VaultFlow Logo"
+            className="size-[30px] max-xl:size-14 mt-[1px] max-xl:ml-[47px]"
           />
-          <h1 className="sidebar-logo">FlexBank</h1>
+          <h1 className="sidebar-logo">VaultFlow</h1>
         </Link>
 
         {/* Navigation Links */}
         {sidebarLinks.map((element) => {
           const isActive =
-            pathName === element.route || pathName.startsWith(`${element.route}/`);
+            pathName === element.route ||
+            pathName.startsWith(`${element.route}/`);
 
           return (
             <Link
@@ -51,11 +52,11 @@ const Sidebar = ({ user }: SiderbarProps) => {
             </Link>
           );
         })}
-        <PlaidLink 
-          user = {user}
-        />
+        <PlaidLink user={user} />
       </nav>
-      <Footer user={user} />
+      <div className="border-t border-gray-300 pt-2">
+        <Footer user={user} />
+      </div>
     </section>
   );
 };

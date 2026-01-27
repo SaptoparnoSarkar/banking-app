@@ -13,11 +13,11 @@ const ibmPlexSerif = IBM_Plex_Serif({
 // Extend existing metadata + add Sentry trace data
 export function generateMetadata(): Metadata {
   return {
-  title: "FlexBank",
-  description: "Banking App with Finance Management.",
-  icons: {
-    icon: '/icons/logo.svg'
-  },
+    title: "VaultFlow",
+    description: "Comprehensive Banking Infrastructure with Data-Driven Insights",
+    icons: {
+      icon: "/icons/logoBank2.svg",
+    },
     other: {
       ...Sentry.getTraceData(),
     },

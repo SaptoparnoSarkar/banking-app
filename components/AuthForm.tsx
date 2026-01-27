@@ -96,22 +96,19 @@ const AuthForm = ({ type }: { type: String }) => {
       <header className="flex flex-col gap-5 md:gap-8">
         <Link href="/" className="cursor-pointer flex items-center gap-1">
           <Image
-            src="/icons/logo.svg"
-            width={34}
-            height={34}
-            alt="FlexBank Logo"
+            src="/icons/logoBank2.svg"
+            width={38}
+            height={38}
+            alt="VaultFlow Logo"
           />
           <h1 className="text-26 font-ibm-plex-serif font-bold text-[#2c4baa]">
-            Flex Bank
+            VaultFlow
           </h1>
         </Link>
 
         <div className="flex flex-col gap-1 md:gap-3">
           <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
-            {user ?
-            "Link Account" : 
-             type === "sign-in" ? 
-            "Sign-in" : "Sign-up"}
+            {user ? "Link Account" : type === "sign-in" ? "Sign-in" : "Sign-up"}
 
             <p className="text-16 font-normal text-grey-600">
               {user
@@ -123,7 +120,7 @@ const AuthForm = ({ type }: { type: String }) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-         <PlaidLink user={user} variant="primary" />
+          <PlaidLink user={user} variant="primary" />
         </div>
       ) : (
         <>
@@ -208,7 +205,7 @@ const AuthForm = ({ type }: { type: String }) => {
                 label="Password"
                 placeholder="Enter your password"
               />
-              
+
               <div className="flex flex-col gap-4">
                 <Button type="submit" className="form-btn" disabled={isLoading}>
                   {isLoading ? (

@@ -23,7 +23,7 @@ export default async function RootLayout({
       {/* For Smaller Screens */}
       <div className="flex flex-col size-full">
         <div className="root-layout">
-          <Image src="/icons/logo.svg" width={30} height={30} alt="menu" />
+          <Image src="/icons/logoBank2.svg" width={35} height={35} alt="menu" />
           <div>
             <MobileNavBar 
             user={loggedIn}
