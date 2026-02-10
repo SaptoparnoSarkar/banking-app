@@ -32,7 +32,7 @@ const TransactionTable = ({ transactions }: TransactionTableProps) => {
   
   return (
     <Table>
-      <TableHeader className="bg-[#f9fafb]">
+      <TableHeader className="bg-[#f9fafb] text-vaultflow-black dark:bg-vaultflow-hover dark:text-vaultflow-white dark:[&_tr]:border-b-blue-400/50">
         <TableRow>
           <TableHead className="px-2">Transaction</TableHead>
           <TableHead className="px-2">Amount</TableHead>
@@ -44,46 +44,48 @@ const TransactionTable = ({ transactions }: TransactionTableProps) => {
       </TableHeader>
       <TableBody>
         {transactions.map((t: Transaction) => {
-            const status = getTransactionStatus(new Date(t.date))
-            const amount = formatAmount(t.amount)
+          const status = getTransactionStatus(new Date(t.date));
+          const amount = formatAmount(t.amount);
 
-            const isDebit = t.type === 'debit';
-            const isCredit = t.type === 'credit';
+          const isDebit = t.type === "debit";
+          const isCredit = t.type === "credit";
 
-            return (
-              <TableRow
-                key={t.id}
-                className={`${isDebit || amount[0] === "-" ? "bg-[#FFFBFA]" : "bg-[#F6FEF9]"} !hover:bg-none !border-b-DEFAULT`}
+          return (
+            <TableRow
+              key={t.id}
+              className={`${isDebit || amount[0] === "-" ? "bg-[#FFFBFA] dark:bg-vaultflow-negative/10 dark:hover:bg-vaultflow-hover" : "bg-[#F6FEF9] dark:bg-vaultflow-success/10 dark:hover:bg-vaultflow-hover"} !hover:bg-none !border-b-DEFAULT dark:text-vaultflow-white dark:border-b-blue-400/50`}
+            >
+              <TableCell className="max-w-[250px] pl-2 pr-10">
+                <div className="flex items-center gap-3">
+                  <h1 className="text-14 truncate font-semibold text-[#344054] dark:text-vaultflow-white">
+                    {removeSpecialCharacters(t.name)}
+                  </h1>
+                </div>
+              </TableCell>
+
+              <TableCell
+                className={`pr-10 pl-3 font-semibold min-w-30 ${isDebit || amount[0] === "-" ? "text-[#f04438]" : "text-[#039855]"}`}
               >
-                <TableCell className="max-w-[250px] pl-2 pr-10">
-                  <div className="flex items-center gap-3">
-                    <h1 className="text-14 truncate font-semibold text-[#344054]">
-                      {removeSpecialCharacters(t.name)}
-                    </h1>
-                  </div>
-                </TableCell>
+                {isDebit ? `-${amount}` : isCredit ? amount : amount}
+              </TableCell>
 
-                <TableCell className={`pr-10 pl-3 font-semibold min-w-30 ${isDebit || amount[0] === "-" ? "text-[#f04438]" : "text-[#039855]"}`}>
-                  {isDebit ? `-${amount}` : isCredit ? amount : amount}
-                </TableCell>
+              <TableCell className="pl-2 pr-10">
+                <CategoryBadge category={status} />
+              </TableCell>
 
-                <TableCell className="pl-2 pr-10">
-                  <CategoryBadge category={status}/>
-                </TableCell>
+              <TableCell className="min-w-32 pl-2 pr-10 text-black-1 dark:text-vaultflow-white">
+                {formatDateTime(new Date(t.date)).dateTime}
+              </TableCell>
 
-                <TableCell className="min-w-32 pl-2 pr-10">
-                  {formatDateTime(new Date(t.date)).dateTime}
-                </TableCell>
+              <TableCell className="pl-2 pr-10 capitalize min-w-24 text-black-1 dark:text-vaultflow-white">
+                {t.paymentChannel}
+              </TableCell>
 
-                <TableCell className="pl-2 pr-10 capitalize min-w-24">
-                  {t.paymentChannel}
-                </TableCell>
-
-                <TableCell className="pl-2 pr-10 max-md:hidden">
-                  <CategoryBadge category={t.category}/>
-                </TableCell>
-              </TableRow>
-            );
+              <TableCell className="pl-2 pr-10 max-md:hidden">
+                <CategoryBadge category={t.category} />
+              </TableCell>
+            </TableRow>
+          );
         })}
       </TableBody>
     </Table>

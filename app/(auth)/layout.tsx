@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex min-h-screen w-full justify-between font-inter">
+    <main className="flex min-h-screen w-full justify-between font-inter dark:bg-white dark:text-vaultflow-black">
       {children}
       <div className="auth-asset relative overflow-hidden">
         <div className="absolute inset-0 z-50 pointer-events-none w-screen h-screen">

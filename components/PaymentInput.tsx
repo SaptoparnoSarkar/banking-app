@@ -25,30 +25,30 @@ const PaymentInput = ({control, name, label, placeholder, description="", inputT
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="border-t border-gray-200">
+        <FormItem className="border-t border-gray-200 dark:border-white/10">
           <div className="payment-transfer_form-item pb-6 pt-5">
             <div className="payment-transfer_form-content">
-              <FormLabel className="text-14 font-medium text-gray-700">
+              <FormLabel className="text-14 font-medium text-gray-700 dark:text-vaultflow-white">
                 {label}
               </FormLabel>
-              <FormDescription className="text-12 font-normal text-gray-600">
+              <FormDescription className="text-12 font-normal text-gray-600 dark:text-vaultflow-muted">
                 {description}
               </FormDescription>
             </div>
             <div className="flex w-full flex-col">
               <FormControl>
                 {inputType === "textarea" ? (
-                <Textarea
-                  placeholder={placeholder}
-                  className="input-class"
-                  {...field}
-                />
-                ): (
-                    <Input 
-                        placeholder={placeholder}
-                        className="input-class"
-                        {...field}
-                    />
+                  <Textarea
+                    placeholder={placeholder}
+                    className="input-class"
+                    {...field}
+                  />
+                ) : (
+                  <Input
+                    placeholder={placeholder}
+                    className="input-class"
+                    {...field}
+                  />
                 )}
               </FormControl>
               <FormMessage className="text-12 text-red-500" />

@@ -94,13 +94,13 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
           name="senderBank"
           render={() => (
             // Bank DropDown is unique, keeping it seperate.
-            <FormItem className="border-t border-gray-200">
+            <FormItem className="border-t border-gray-200 dark:border-white/10">
               <div className="payment-transfer_form-item pb-6 pt-5">
                 <div className="payment-transfer_form-content">
-                  <FormLabel className="text-14 font-medium text-gray-700">
+                  <FormLabel className="text-14 font-medium text-gray-700 dark:text-vaultflow-white">
                     Select Source Bank
                   </FormLabel>
-                  <FormDescription className="text-12 font-normal text-gray-600">
+                  <FormDescription className="text-12 font-normal text-gray-600 dark:text-vaultflow-muted">
                     Select the bank account you want to transfer funds from
                   </FormDescription>
                 </div>
@@ -129,10 +129,10 @@ const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
         />
 
         <div className="payment-transfer_form-details">
-          <h2 className="text-18 font-semibold text-gray-900">
+          <h2 className="text-18 font-semibold text-gray-900 dark:text-vaultflow-white">
             Bank account details
           </h2>
-          <p className="text-16 font-normal text-gray-600">
+          <p className="text-16 font-normal text-gray-600 dark:text-vaultflow-muted">
             Enter the bank account details of the recipient
           </p>
         </div>

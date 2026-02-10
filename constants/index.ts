@@ -1,3 +1,4 @@
+
 export const sidebarLinks = [
   {
     imgURL: "/icons/home.svg",
@@ -50,77 +51,77 @@ export const ITEMS = [
 ];
 
 export const topCategoryStyles = {
-  "Food & Entertainment": {
-    bg: "bg-blue-25",
-    circleBg: "bg-blue-100",
-    text: {
-      main: "text-blue-900",
-      count: "text-blue-700",
-    },
-    progress: {
-      bg: "bg-blue-100",
-      indicator: "bg-blue-700",
-    },
-    icon: "/icons/monitor.svg",
-  },
   Commute: {
-    bg: "bg-success-25",
-    circleBg: "bg-success-100",
+    bg: "bg-blue-25 dark:bg-vaultflow-commute/20",
+    circleBg: "bg-blue-100 dark:bg-vaultflow-commute",
     text: {
-      main: "text-success-900",
-      count: "text-success-700",
+      main: "text-blue-900 dark:text-vaultflow-white",
+      count: "text-blue-700 dark:text-vaultflow-muted",
     },
     progress: {
-      bg: "bg-success-100",
-      indicator: "bg-success-700",
+      bg: "bg-blue-100 dark:bg-vaultflow-commute/10",
+      indicator: "bg-blue-700 dark:bg-vaultflow-commute",
     },
-    icon: "/icons/coins.svg",
+    icon: "/icons/commute-sharp.svg",
   },
-  default: {
-    bg: "bg-pink-25",
-    circleBg: "bg-pink-100",
+  "Food & Entertainment": {
+    bg: "bg-pink-25 dark:bg-vaultflow-transfer/20",
+    circleBg: "bg-pink-100 dark:bg-vaultflow-transfer",
     text: {
-      main: "text-pink-900",
-      count: "text-pink-700",
+      main: "text-pink-900 dark:text-vaultflow-white",
+      count: "text-pink-700 dark:text-vaultflow-muted",
     },
     progress: {
-      bg: "bg-pink-100",
-      indicator: "bg-pink-700",
+      bg: "bg-pink-100 dark:bg-vaultflow-transfer/10",
+      indicator: "bg-pink-700 dark:bg-vaultflow-transfer",
     },
     icon: "/icons/shopping-bag.svg",
+  },
+  default: {
+    bg: "bg-success-25 dark:bg-vaultflow-success/20",
+    circleBg: "bg-success-100 dark:bg-vaultflow-success",
+    text: {
+      main: "text-success-900 dark:text-vaultflow-white",
+      count: "text-success-700 dark:text-vaultflow-muted",
+    },
+    progress: {
+      bg: "bg-success-100 dark:bg-vaultflow-success/10",
+      indicator: "bg-success-700 dark:bg-vaultflow-success",
+    },
+    icon: "/icons/coins.svg",
   },
 };
 
 export const transactionCategoryStyles = {
   "Food & Entertainment": {
-    borderColor: "border-pink-600",
-    backgroundColor: "bg-pink-500",
-    textColor: "text-pink-700",
-    chipBackgroundColor: "bg-inherit",
+    borderColor: "border-pink-600 dark:border-vaultflow-transfer",
+    backgroundColor: "bg-pink-500 dark:bg-vaultflow-transfer",
+    textColor: "text-pink-700 dark:text-orange-50",
+    chipBackgroundColor: "bg-pink-500/10 dark:bg-none",
   },
   Transfer: {
     borderColor: "border-success-600",
     backgroundColor: "bg-green-600",
-    textColor: "text-success-700",
-    chipBackgroundColor: "bg-inherit",
+    textColor: "text-success-700 dark:text-success-50",
+    chipBackgroundColor: "bg-[#ECFDF3] dark:bg-transparent ",
   },
   "Bank Fees": {
     borderColor: "border-success-600",
     backgroundColor: "bg-green-600",
     textColor: "text-success-700",
-    chipBackgroundColor: "bg-inherit",
+    chipBackgroundColor: "bg-inherit dark:bg-none",
   },
   Income: {
     borderColor: "border-red-700",
     backgroundColor: "bg-red-700",
     textColor: "text-red-700",
-    chipBackgroundColor: "bg-inherit",
+    chipBackgroundColor: "bg-inherit dark:bg-none",
   },
   Processing: {
     borderColor: "border-[#F2F4F7]",
     backgroundColor: "bg-gray-500",
     textColor: "text-[#344054]",
-    chipBackgroundColor: "bg-[#F2F4F7]",
+    chipBackgroundColor: "bg-[#F2F4F7] dark:bg-none",
   },
   Success: {
     borderColor: "border-[#12B76A]",
@@ -131,13 +132,13 @@ export const transactionCategoryStyles = {
   Commute: {
     borderColor: "border-[#0047AB]",
     backgroundColor: "bg-blue-500",
-    textColor: "text-blue-700",
-    chipBackgroundColor: "bg-[#ECFDF3]",
+    textColor: "text-blue-700 dark:text-blue-50",
+    chipBackgroundColor: "bg-blue-25 dark:bg-transparent",
   },
   default: {
     borderColor: "",
     backgroundColor: "bg-blue-500",
     textColor: "text-blue-700",
-    chipBackgroundColor: "bg-inherit",
+    chipBackgroundColor: "bg-inherit dark:bg-none",
   },
 };

@@ -26,16 +26,16 @@ const CustomInput = ({control, name, label, placeholder} : CustomInput) => {
   return (
     <FormField
       control={control}
-      name= {name}
+      name={name}
       render={({ field }) => (
         <FormItem className="form-item">
           <FormLabel className="form-label">{label}</FormLabel>
           <div className="flex w-full flex-col">
             <FormControl>
               <Input
-                placeholder= {placeholder}
-                className="input-class"
-                type={name==="password"? "password":"string"}
+                placeholder={placeholder}
+                className="input-class dark:dark:border-vaultflow-background/20"
+                type={name === "password" ? "password" : "string"}
                 {...field}
               />
             </FormControl>

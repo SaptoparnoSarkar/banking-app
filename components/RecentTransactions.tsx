@@ -17,7 +17,7 @@ const RecentTransactions = ({accounts,transactions=[],appwriteItemId,page=1}:Rec
   return (
     <section className="recent-transactions">
       <header className="flex items-center justify-between">
-        <h2 className="recent-transactions-label">Recent Transactions</h2>
+        <h2 className="recent-transactions-label ">Recent Transactions</h2>
         <Link
           href={`/transaction-history/?id=${appwriteItemId}`}
           className="view-all-btn"
@@ -43,7 +43,7 @@ const RecentTransactions = ({accounts,transactions=[],appwriteItemId,page=1}:Rec
           <TabsContent
             value={account.appwriteItemId}
             key={account.id}
-            className="space-y-4"
+            className="space-y-4" 
           >
             <BankInfo
               account={account}

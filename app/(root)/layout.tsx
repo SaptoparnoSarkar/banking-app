@@ -15,19 +15,15 @@ export default async function RootLayout({
   if (!loggedIn) redirect("/sign-in");
 
   return (
-    <main className="flex h-screen w-full font-inter">
-      <Sidebar 
-      user={loggedIn}
-      />
-      
+    <main className="flex h-full w-full font-inter dark:bg-vaultflow-background">
+      <Sidebar user={loggedIn} />
+
       {/* For Smaller Screens */}
-      <div className="flex flex-col size-full">
+      <div className="flex flex-col size-full ">
         <div className="root-layout">
           <Image src="/icons/logoBank2.svg" width={35} height={35} alt="menu" />
           <div>
-            <MobileNavBar 
-            user={loggedIn}
-            />
+            <MobileNavBar user={loggedIn} />
           </div>
         </div>
         {children}

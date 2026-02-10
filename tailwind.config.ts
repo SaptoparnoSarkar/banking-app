@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -68,12 +68,46 @@ const config = {
           700: "#344054",
           900: "#101828",
         },
+        vaultflow: {
+          // App surfaces
+          background: "#071C3A", // Midnight Navy
+          sidebar: "#061833", // Abyss Blue
+          card: "#0E2A56", // Deep Atlantic
+          table: "#0A254A", // Dark Harbor
+          hover: "#102E5C", // Deep Ocean
+
+          // Brand
+          primary: "#2563EB", // Electric Blue
+          accent: "#F59E2B", // Amber Flame
+          link: "#3B82F6", // Royal Blue
+
+          // Text
+          muted: "#A8B4D4", // Soft Steel
+          white: "#FFFFFF", // Pure White
+          cyan: "#22D3EE", //Electric Cyan
+          black: "#000000", //Black
+
+          // Status
+          success: "#22C55E", // Emerald
+          positive: "#4ADE80", // Mint
+          negative: "#FB6A4A", // Coral Red
+
+          // Categories
+          transfer: "#F97316", // Solar Orange
+          food: "#EC4899", // Neon Rose
+          commute: "#3B82F6", // Skyline Blue
+
+          //Glow
+          bloom: "20px 20px 20px 2px rgba(249, 115, 22, 0.6)",
+        },
       },
       backgroundImage: {
         "bank-gradient": "linear-gradient(90deg, #0179FE 0%, #4893FF 100%)",
         "gradient-mesh": "url('/icons/gradient-mesh.svg')",
         "bank-green-gradient":
           "linear-gradient(90deg, #01797A 0%, #489399 100%)",
+        "vaultflow-banner":
+          "linear-gradient(135deg, #1E4FD8 0%, #3B82F6 45%, #6FA8FF 100%)",
       },
       boxShadow: {
         form: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",

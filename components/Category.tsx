@@ -13,7 +13,7 @@ const Category = ({category}: CategoryProps) => {
     } = topCategoryStyles[category.name as keyof typeof topCategoryStyles] || topCategoryStyles.default;
 
   return (
-    <div className={cn("gap-[18px flex p-4 rounded-xl", bg)}>
+    <div className={cn("gap-[18px] flex p-4 rounded-xl", bg)}>
         <figure className={cn("flex-center size-10 rounded-full", circleBg)}>
             <Image 
                 src={icon}

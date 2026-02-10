@@ -45,7 +45,7 @@ export const BankDropdown = ({
       onValueChange={(value) => handleBankChange(value)}
     >
       <SelectTrigger
-        className={`flex w-full gap-3 bg-white md:w-[300px] ${otherStyles}`}
+        className={`flex w-full gap-3 bg-white md:w-[300px] ${otherStyles} dark:bg-white dark:border-white/10 dark:text-vaultflow-black `}
       >
         <Image
           src="icons/credit-card.svg"
@@ -56,11 +56,11 @@ export const BankDropdown = ({
         <p className="line-clamp-1 w-full text-left">{selected.name}</p>
       </SelectTrigger>
       <SelectContent
-        className={`w-full bg-white md:w-[300px] ${otherStyles}`}
+        className={`w-full bg-white md:w-[300px] ${otherStyles} dark:bg-slate-50`}
         align="end"
       >
         <SelectGroup>
-          <SelectLabel className="py-2 font-normal text-gray-500">
+          <SelectLabel className="py-2 font-normal text-gray-500 dark:text-black-1">
             Select a bank to display
           </SelectLabel>
           {accounts.map((account: Account) => (
@@ -70,7 +70,9 @@ export const BankDropdown = ({
               className="cursor-pointer border-t"
             >
               <div className="flex flex-col ">
-                <p className="text-16 font-medium">{account.name}</p>
+                <p className="text-16 font-medium dark:text-bl dark:text-vaultflow-black">
+                  {account.name}
+                </p>
                 <p className="text-14 font-medium text-blue-600">
                   {formatAmount(account.currentBalance)}
                 </p>

@@ -23,7 +23,7 @@ export const Pagination = ({ page, totalPages }: PaginationProps) => {
   };
 
   return (
-    <div className="flex justify-between gap-3">
+    <div className="flex justify-between gap-3 text-black-1 dark:text-white">
       <Button
         size="lg"
         variant="ghost"
