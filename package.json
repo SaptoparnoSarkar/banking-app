@@ -38,6 +38,7 @@
     "react-remove-scroll": "^2.7.2",
     "react-snowfall": "^2.4.0",
     "tailwind-merge": "^2.3.0",
+    "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.25.76"
   },

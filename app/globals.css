@@ -7,16 +7,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
 /* Frosted glass background */
 .glassmorphism {
   background: rgba(255, 255, 255, 0.25);
@@ -43,9 +34,26 @@
   background: #7878a3;
 }
 
-
+@layer base {
+  html,
+  body {
+    @apply overflow-x-hidden overflow-y-hidden;
+  }
+}
 
 @layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
   .theme-transition {
     @apply transition-all duration-500 ease-in-out;
   }
@@ -107,11 +115,11 @@
 
   /* Home */
   .home {
-    @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll dark:bg-vaultflow-background text-vaultflow-white;
+    @apply scrollbar-hide flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll dark:bg-vaultflow-background text-vaultflow-white;
   }
 
   .home-content {
-    @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
+    @apply scrollbar-hide flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
   }
 
   .home-header {
@@ -250,7 +258,7 @@
 
   /* Mobile nav */
   .mobilenav-sheet {
-    @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto;
+    @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto scrollbar-hide;
   }
 
   .mobilenav-sheet_close {
@@ -387,6 +395,6 @@
 
   /* Light/Dark Mode Toggle */
   .toggle{
-    @apply flex items-center justify-between p-3 rounded-xl border border-gray-200 bg-white dark:bg-bank-gradient dark:border-none shadow-sm;
+    @apply flex items-center justify-between p-3 rounded-xl border border-gray-200 bg-white max-w-[100] dark:bg-bank-gradient dark:border-none shadow-sm;
   }
 }

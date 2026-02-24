@@ -41,8 +41,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
               key={element.label}
               className={cn("sidebar-link", {
                 "bg-bankGradient dark:bg-vaultflow-accent": isActive,
-              })}
-            >
+              })} >
               <div className="relative size-6">
                 <Image
                   src={element.imgURL}

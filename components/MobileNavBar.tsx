@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Footer from "./Footer";
 import PlaidLink from "./PlaidLink";
+import { ThemeToggle } from "./ThemeToggle";
 
 const MobileNavBar = ({ user }: MobileNavProps) => {
   const pathName = usePathname();
@@ -20,16 +21,21 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
     <section className="w-full max-w-[264px]">
       <Sheet>
         <SheetTrigger>
-          <Image
-            src="/icons/hamburger.svg"
-            width={30}
-            height={30}
-            alt="menu"
-            className="cursor-pointer"
-          />
+          <div className="bg-white dark:bg-white p-2 rounded-[16px]">
+            <Image
+              src="/icons/hamburger.svg"
+              width={30}
+              height={30}
+              alt="menu"
+              className="cursor-pointer"
+            />
+          </div>
         </SheetTrigger>
 
-        <SheetContent side="left" className="border-none bg-white">
+        <SheetContent
+          side="left"
+          className="border-none bg-white dark:bg-vaultflow-sidebar"
+        >
           <Link
             href="/"
             className="cursor-pointer flex items-center px-4 gap-1"
@@ -40,7 +46,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
               height={34}
               alt="VaultFlow Logo"
             />
-            <h1 className="text-26 font-ibm-plex-serif font-bold text-[#2c4baa]">
+            <h1 className="text-26 font-ibm-plex-serif pl-2 font-bold text-[#2c4baa] dark:text-vaultflow-white">
               VaultFlow
             </h1>
           </Link>
@@ -60,7 +66,7 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                         href={item.route}
                         key={item.label}
                         className={cn("mobilenav-sheet_close", {
-                          "bg-bankGradient": isActive,
+                          "bg-bankGradient dark:bg-vaultflow-accent": isActive,
                         })}
                       >
                         <Image
@@ -70,12 +76,16 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                           height={20}
                           className={cn({
                             "brightness-[3] invert-0": isActive,
+                            "dark:brightness-[3]": !isActive,
                           })}
                         />
                         <p
-                          className={cn("text-16 font-semibold text-black-1", {
-                            "!text-white": isActive,
-                          })}
+                          className={cn(
+                            "text-16 font-semibold text-black-1 dark:text-vaultflow-white",
+                            {
+                              "!text-white": isActive,
+                            },
+                          )}
                         >
                           {item.label}
                         </p>
@@ -86,8 +96,13 @@ const MobileNavBar = ({ user }: MobileNavProps) => {
                 <PlaidLink user={user} />
               </nav>
             </SheetClose>
+            <div className="mt-auto flex flex-col gap-2">
+              <div className="px-3 xl:px-0">
+                <ThemeToggle />
+              </div>
+              <Footer user={user} type="mobile" />
+            </div>
 
-            <Footer user={user} type="mobile" />
             {/* type mobile for mobile and default is for desktop */}
           </div>
         </SheetContent>

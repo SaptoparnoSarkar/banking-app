@@ -64,7 +64,7 @@ const TransactionTable = ({ transactions }: TransactionTableProps) => {
               </TableCell>
 
               <TableCell
-                className={`pr-10 pl-3 font-semibold min-w-30 ${isDebit || amount[0] === "-" ? "text-[#f04438]" : "text-[#039855]"}`}
+                className={`pr-10 pl-3 font-semibold min-w-40 ${isDebit || amount[0] === "-" ? "text-[#f04438]" : "text-[#039855]"}`}
               >
                 {isDebit ? `-${amount}` : isCredit ? amount : amount}
               </TableCell>
@@ -77,7 +77,7 @@ const TransactionTable = ({ transactions }: TransactionTableProps) => {
                 {formatDateTime(new Date(t.date)).dateTime}
               </TableCell>
 
-              <TableCell className="pl-2 pr-10 capitalize min-w-24 text-black-1 dark:text-vaultflow-white">
+              <TableCell className="pl-2 pr-10 capitalize min-w-24 max-md:hidden text-black-1 dark:text-vaultflow-white">
                 {t.paymentChannel}
               </TableCell>
 
